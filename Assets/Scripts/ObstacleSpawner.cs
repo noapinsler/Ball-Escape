@@ -1,35 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    public GameObject obstaclePrefab; // Prefab of the obstacle
-    public float spawnInterval = 2f;  // Time interval between spawns
-    public float spawnRangeX = 8f;    // Range of X-axis for spawning
+    public GameObject obstaclePrefab;  // Reference to the prefab (must be set in the Inspector)
+    public float spawnInterval = 2.0f;  // Time between spawns
+    public float spawnXRange = 5.0f;    // Range for X position for spawning
+    public float spawnYPosition = 10.0f;  // Y position to spawn obstacles at
 
-    private float timer;
+    private float timer = 0;
+
+    void Start()
+    {
+        Debug.Log("Initial obstaclePrefab reference: " + (obstaclePrefab != null ? obstaclePrefab.name : "None"));
+    }
 
     void Update()
     {
-        // Increment the timer by the time elapsed since the last frame
         timer += Time.deltaTime;
-
-        // Check if the timer exceeds the spawn interval
         if (timer >= spawnInterval)
         {
             SpawnObstacle();
-            timer = 0f; // Reset the timer
+            timer = 0;
         }
     }
 
     void SpawnObstacle()
     {
-        // Randomize the X position for spawning within the specified range
-        float randomX = Random.Range(-spawnRangeX, spawnRangeX);
-        Vector2 spawnPosition = new Vector2(randomX, transform.position.y);
+        if (obstaclePrefab == null)
+        {
+            Debug.LogError("Obstacle prefab is missing or has been destroyed!");
+            return;  // Exit early to avoid errors
+        }
 
-        // Instantiate the obstacle at the randomized position
+        Debug.Log("Spawning obstacle from prefab: " + obstaclePrefab.name);  // Debug line
+
+        // Calculate a random position within the X range
+        float spawnX = Random.Range(-spawnXRange, spawnXRange);
+        Vector3 spawnPosition = new Vector3(spawnX, spawnYPosition, 0);
+
+
+        // Instantiate the prefab at the calculated position
         Instantiate(obstaclePrefab, spawnPosition, Quaternion.identity);
     }
 }
