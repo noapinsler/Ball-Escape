@@ -23,6 +23,7 @@ public class ObstacleSpawner : MonoBehaviour
             timer = 0;
         }
     }
+    
 
     void SpawnObstacle()
     {
@@ -41,5 +42,10 @@ public class ObstacleSpawner : MonoBehaviour
 
         // Instantiate the prefab at the calculated position
         Instantiate(obstaclePrefab, spawnPosition, Quaternion.identity);
+    }
+    
+    public void SetSpawnInterval(float newSpwanInterval)
+    {
+        spawnInterval = newSpwanInterval;
     }
 }

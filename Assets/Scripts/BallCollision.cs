@@ -1,34 +1,39 @@
-using UnityEngine;
+    using UnityEngine;
 
-public class BallCollision : MonoBehaviour
-{
-    private Rigidbody2D rb;
-
-    void Start()
+    public class BallCollision : MonoBehaviour
     {
-        // Get the Rigidbody2D component attached to the ball
-        rb = GetComponent<Rigidbody2D>();
-    }
+        private Rigidbody2D rb;
+        public GameObject gameOverUI; // Reference to the Game Over UI
+        public AudioSource audioSource;
+        public AudioSource backgroundAudio;
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Obstacle"))
+
+        void Start()
         {
-            Debug.Log("Game Over! Ball hit an obstacle.");
+            // Get the Rigidbody2D component attached to the ball
+            rb = GetComponent<Rigidbody2D>();
+        }
 
-            // Stop the ball's movement
-            rb.velocity = Vector2.zero;
-            rb.angularVelocity = 0f;  // Stop any rotation
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Obstacle"))
+            {
+                Debug.Log("Game Over! Ball hit an obstacle.");
 
-            // Call the GameOver method from the GameManager
-            if (GameManager.instance != null)
-            {
-                GameManager.instance.GameOver();
-            }
-            else
-            {
-                Debug.LogError("GameManager instance not found!");
+                // Stop the ball's movement
+                rb.velocity = Vector2.zero;
+                rb.angularVelocity = 0f;
+                backgroundAudio.Stop();
+
+                audioSource.Play();
+                // Stop the entire game by freezing time
+                Time.timeScale = 0f;
+                backgroundAudio.Play();
+
+               
+                // Display the Game Over UI
+                gameOverUI.SetActive(true);
+
             }
         }
     }
-}

@@ -24,7 +24,7 @@ public class Obstacle : MonoBehaviour
         }
 
         // Destroy the obstacle if it falls off the screen
-        if (transform.position.y < -6f)
+        if (transform.position.y < -8f)
         {
             Debug.Log("Destroy");
             Destroy(gameObject);
@@ -50,4 +50,11 @@ public class Obstacle : MonoBehaviour
             }
         }
     }
+
+    public void setObstacleSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
+
 }
+
