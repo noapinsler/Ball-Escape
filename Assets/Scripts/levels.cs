@@ -15,21 +15,21 @@ public class Levels : MonoBehaviour
 
     public void Easy()
     {
-        obstacleSpeed.setObstacleSpeed(10);
+        obstacleSpeed.setObstacleSpeed(3);
         obstcaleSpawner.SetSpawnInterval(2f);
         Startgame();
     }
 
     public void Medium()
     {
-        obstacleSpeed.setObstacleSpeed(20);
+        obstacleSpeed.setObstacleSpeed(10);
         obstcaleSpawner.SetSpawnInterval(1f);
         Startgame();
     }
 
     public void Hard()
     {
-        obstacleSpeed.setObstacleSpeed(30);
+        obstacleSpeed.setObstacleSpeed(15);
         obstcaleSpawner.SetSpawnInterval(0.5f);
 
         Startgame();
