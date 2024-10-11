@@ -22,6 +22,9 @@ public class Laser : MonoBehaviour
       Debug.Log("Laser hit an obstacle, dest  roying both.");
       Destroy(other.gameObject); // Destroy the obstacle
       Destroy(gameObject); // Destroy the laser
+
+      // Increase the score by 1 when hitting an obstacle
+      ScoreManager.instance.AddScore(1);
     }
   }
 }

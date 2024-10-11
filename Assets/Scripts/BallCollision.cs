@@ -1,4 +1,5 @@
     using UnityEngine;
+    using TMPro;
 
     public class BallCollision : MonoBehaviour
     {
@@ -6,9 +7,11 @@
         public GameObject gameOverUI; // Reference to the Game Over UI
         public AudioSource audioSource;
         public AudioSource backgroundAudio;
+        public TextMeshProUGUI finalScoreText;  // Reference to the Final Score Text in the GameOverUI
+        public TextMeshProUGUI scoreText;       // Reference to the Score Text used during gameplay (under GameElements)
 
 
-        void Start()
+    void Start()
         {
             // Get the Rigidbody2D component attached to the ball
             rb = GetComponent<Rigidbody2D>();
@@ -31,10 +34,9 @@
                 Time.timeScale = 0f;
                 backgroundAudio.Play();
 
-               
+                finalScoreText.text = "Your "+ scoreText.text;
                 // Display the Game Over UI
                 gameOverUI.SetActive(true);
-
             }
         }
     }

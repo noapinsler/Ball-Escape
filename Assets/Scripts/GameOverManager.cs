@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class GameOverManager : MonoBehaviour
         GameElements.SetActive(false);
         GameOverUI.SetActive(false);
         GameWinnerUI.SetActive(false);
-
+        ScoreManager.instance.ResetScore();
         // Show the main menu
         MainMenu.SetActive(true);
     }
